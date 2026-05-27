@@ -1,166 +1,129 @@
-# Mista King Kitchen — Hostinger Deployment Guide
+# Mista King Kitchen — Node.js Web App
 
 ## Overview
-This is a Node.js/Express web application for the Mista King Kitchen restaurant website.
-It serves the static HTML landing page and includes a contact form API endpoint.
+Full-stack restaurant website with:
+- Express.js server with contact form (SendGrid email)
+- PocketBase backend (admin panel, database)
+- Static landing page with full menu, branches, social links
+
+## Admin Access
+- **Email:** info@nenifix.com
+- **Password:** nenifix2mkk
+- **Admin URL:** `http://yourdomain.com/_/pb` or `http://yourdomain.com:8090/_/`
 
 ## Prerequisites
-- Hostinger hosting plan that supports Node.js (Business Web Hosting or higher)
-- Node.js 18+ installed on the server
-- Git installed locally
+- Node.js 18+
+- PocketBase binary (auto-downloaded via setup script)
 
-## Deployment Steps
+## Quick Start
 
-### Option 1: Deploy via Hostinger Git Deployment (Recommended)
-
-1. **Enable Git in Hostinger hPanel:**
-   - Log in to hPanel → Advanced → Git
-   - Configure repository settings
-   - Set deployment path to `public_html` or a subdirectory
-
-2. **Set up the repository:**
-   ```bash
-   cd C:\Users\ai9\Desktop\mistakingkitchen-app
-   git init
-   git add .
-   git commit -m "Mista King Kitchen Node.js app"
-   git remote add origin https://github.com/nenifix/mistakingkitchen.git
-   git push -u origin main
-   ```
-
-3. **In Hostinger hPanel → Node.js:**
-   - Select Node.js version 18+
-   - Set application root: `public_html/mistakingkitchen-app`
-   - Set application startup file: `server.js`
-   - Set application URL to your domain
-   - Click "Enable" and "Save"
-
-4. **Install dependencies on Hostinger:**
-   - Go to hPanel → Terminal (or SSH)
-   ```bash
-   cd ~/public_html/mistakingkitchen-app
-   npm install --production
-   ```
-
-5. **Restart the app:**
-   - In hPanel → Node.js → click "Restart"
-
-### Option 2: Deploy via FTP/SFTP
-
-1. **Install dependencies locally first:**
-   ```bash
-   cd C:\Users\ai9\Desktop\mistakingkitchen-app
-   npm install --production
-   ```
-
-2. **Upload via FileZilla or Hostinger File Manager:**
-   - Upload the entire folder to `public_html/mistakingkitchen-app`
-   - Make sure `node_modules` is included
-
-3. **Configure Node.js in hPanel:**
-   - Go to hPanel → Advanced → Node.js
-   - Set root directory, startup file, and port
-   - Enable and restart
-
-### Option 3: Deploy via SSH
-
+### 1. Install dependencies
 ```bash
-# Connect to Hostinger via SSH
-ssh youruser@yourdomain.com
-
-# Clone the repo
-cd ~
-git clone https://github.com/nenifix/mistakingkitchen.git mistakingkitchen-app
-
-# Install dependencies
-cd mistakingkitchen-app
-npm install --production
-
-# Set up in hPanel Node.js section to point to this directory
+npm install
 ```
 
-## Contact Form Setup (Optional Enhancement)
+### 2. Setup PocketBase (download binary + create admin)
 
-By default, the form shows a success message on the frontend. To actually **receive emails**, integrate one of these:
-
-### Option A: Hostinger SMTP (Recommended)
-Edit `.env` with your Hostinger email credentials:
-```
-SMTP_HOST=smtp.hostinger.com
-SMTP_PORT=587
-SMTP_USER=your@yourdomain.com
-SMTP_PASS=yourpassword
-CONTACT_TO=godwintext@gmail.com
+**Linux/Mac:**
+```bash
+bash setup-pb.sh
 ```
 
-Then install `nodemailer` and update `server.js` to use it.
-
-### Option B: SendGrid
-```
-SENDGRID_API_KEY=SG.xxx
-CONTACT_TO=godwintext@gmail.com
+**Windows:**
+```cmd
+setup-pb.bat
 ```
 
-### Option C: Formspree (Easiest, no code changes)
-1. Go to https://formspree.io and create a free form
-2. Replace the form action in `index.html`:
-```html
-<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+Or manually:
+```bash
+# Download PocketBase from https://pocketbase.io/docs/
+# Place binary in this directory as `pocketbase` (or `pocketbase.exe` on Windows)
+
+# Start PocketBase
+./pocketbase serve --http 127.0.0.1:8090
+
+# Create admin (in another terminal)
+curl -X POST http://127.0.0.1:8090/api/admins \
+  -H "Content-Type: application/json" \
+  -d '{"email":"info@nenifix.com","password":"nenifix2mkk","passwordConfirm":"nenifix2mkk"}'
 ```
-3. Remove the JavaScript form handler
+
+### 3. Create .env
+```bash
+cp .env.example .env
+# Edit .env with your values
+```
+
+### 4. Start the app
+```bash
+npm start
+```
+
+The server starts on port 3000 (or `PORT` env var).
+PocketBase runs on port 8090.
+
+## Deployment on Hostinger
+
+### Option A: Git Deployment
+1. Upload this folder to Hostinger via Git/FTP/File Manager
+2. In hPanel → Advanced → Node.js:
+   - Root: `hostinger/`
+   - Startup file: `server.js`
+   - Node version: 18+
+3. In hPanel → Terminal:
+   ```bash
+   cd ~/public_html/hostinger
+   npm install --production
+   bash setup-pb.sh
+   ```
+4. Restart Node.js app in hPanel
+
+### Option B: Zip Upload
+1. Create a zip of this directory
+2. Upload via hPanel → File Manager
+3. Extract and follow steps 2-4 above
+
+## API Endpoints
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/health` | GET | Health check |
+| `/api/contact` | POST | Submit contact form → sends email via SendGrid |
+| `/api/pb/*` | ANY | PocketBase API proxy |
+| `/_/pb/*` | ANY | PocketBase Admin UI proxy |
+| `/*` | GET | Static landing page |
+
+## Contact Form
+POST `/api/contact` with JSON body:
+```json
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "phone": "053 046 0039",
+  "message": "Hello, I'd like to order..."
+}
+```
+
+## PocketBase Admin
+Access the admin panel at `/_/pb` to:
+- View contact form submissions (create a `messages` collection)
+- Manage menu items, branches, content
+- View analytics
 
 ## File Structure
 ```
-mistakingkitchen-app/
-├── server.js          # Express server
-├── package.json       # Dependencies
-├── .env               # Environment variables (create from .env.example)
-├── .env.example       # Template for .env
-├── .gitignore         # Git ignore rules
+hosterin/
+├── server.js           # Express server + PocketBase launcher
+├── package.json        # Node.js dependencies
+├── .env.example        # Environment template
+├── setup-pb.sh         # PocketBase setup (Linux/Mac)
+├── setup-pb.bat        # PocketBase setup (Windows)
+├── pocketbase/         # PocketBase binary + data (created on setup)
+│   ├── pocketbase      # Binary
+│   └── pb_data/        # Database files
 ├── public/
-│   └── index.html     # The complete landing page
-└── README.md          # This file
-```
-
-## Environment Variables
-| Variable | Description | Default |
-|----------|-------------|---------|
-| PORT | Server port | 3000 |
-| SMTP_HOST | Email server host | — |
-| SMTP_PORT | Email server port | 587 |
-| SMTP_USER | Email username | — |
-| SMTP_PASS | Email password | — |
-| CONTACT_TO | Where to send contact form messages | godwintext@gmail.com |
-
-## Troubleshooting
-
-### App shows "Unable to connect"
-- Check that Node.js is enabled in hPanel
-- Verify `server.js` is the startup file
-- Check the port matches what Hostinger expects
-
-### 502 Bad Gateway
-- App may have crashed. Check logs in hPanel → Node.js → Logs
-- Run `npm install` again in the app directory
-
-### Node modules not found
-```bash
-cd ~/public_html/mistakingkitchen-app
-rm -rf node_modules
-npm install --production
-```
-
-### Port already in error logs
-Hostinger sets the PORT environment variable automatically. Don't hardcode it.
-
-## Updating the Site
-```bash
-cd C:\Users\ai9\Desktop\mistakingkitchen-app
-# Edit files as needed
-git add .
-git commit -m "Update message"
-git push
-# Then on Hostinger: git pull or use hPanel Git deployment
+│   └── index.html      # Landing page
+└── README.md
 ```
 
 ## Support
