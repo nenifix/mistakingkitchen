@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mista King Kitchen — Delicious Food Crafted for Royalty</title>
+    <meta name="description" content="Mista King Kitchen — Authentic Ghanaian & continental cuisine in Kumasi. Shawarma, Jollof Rice, Noodles, Fried Rice, Pizza. Order now!">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            red: '#D00000',
+                            redHover: '#B00000',
+                            redLight: '#FFF0F0',
+                            dark: '#111111',
+                            grey: '#222222',
+                            offwhite: '#F9F9F9',
+                            cream: '#FFF8F0',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        display: ['Poppins', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        html { scroll-behavior: smooth; }
+        .hero-circle {
+            background: radial-gradient(circle at 35% 35%, #e83030, #D00000 40%, #8B0000 80%);
+            box-shadow: 0 25px 60px rgba(208, 0, 0, 0.35), inset 0 -10px 30px rgba(0,0,0,0.2);
+        }
+        .hero-circle::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60%; height: 60%;
+            border-radius: 50%;
+            border: 3px dashed rgba(255,255,255,0.25);
+        }
+        .hero-circle::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 35%; height: 35%;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.08);
+            border: 2px solid rgba(255,255,255,0.15);
+        }
+        .floating-card {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+        }
+        .menu-card:hover { transform: translateY(-6px); }
+        .menu-card { transition: all 0.3s ease; }
+        .announcement-bar {
+            animation: pulse-bg 2s ease-in-out infinite;
+        }
+        @keyframes pulse-bg {
+            0%, 100% { background-color: #111111; }
+            50% { background-color: #1a1a1a; }
+        }
+        .nav-link { position: relative; }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px; left: 0;
+            width: 0; height: 2px;
+            background: #D00000;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after { width: 100%; }
+    </style>
+</head>
+<body class="font-sans text-gray-800 bg-white">
+
+    <!-- ============================================ -->
+    <!-- 1. HEADER / NAVBAR -->
+    <!-- ============================================ -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 lg:h-20">
+                <!-- Logo -->
+                <a href="#" class="flex-shrink-0">
+                    <span class="font-display font-extrabold text-xl lg:text-2xl tracking-tight">
+                        <span class="text-brand-red">MISTA</span> <span class="text-brand-dark">KING</span>
+                        <span class="text-brand-red"> KITCHEN</span>
+                    </span>
+                </a>
+
+                <!-- Desktop Nav -->
+                <div class="hidden lg:flex items-center space-x-8">
+                    <a href="#home" class="nav-link text-sm font-medium text-gray-700 hover:text-brand-red transition">Home</a>
+                    <a href="#story" class="nav-link text-sm font-medium text-gray-700 hover:text-brand-red transition">Story</a>
+                    <a href="#menu" class="nav-link text-sm font-medium text-gray-700 hover:text-brand-red transition">Menu</a>
+                    <a href="#locations" class="nav-link text-sm font-medium text-gray-700 hover:text-brand-red transition">Locations</a>
+                    <a href="#contact" class="nav-link text-sm font-medium text-gray-700 hover:text-brand-red transition">Contact</a>
+                    <a href="#socials" class="nav-link text-sm font-medium text-gray-700 hover:text-brand-red transition">Socials</a>
+                </div>
+
+                <!-- CTA Button -->
+                <div class="hidden lg:block">
+                    <a href="tel:0530460039" class="inline-flex items-center gap-2 bg-brand-dark text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-gray-800 transition shadow-md">
+                        <i class="fas fa-phone-alt text-xs"></i>
+                        Order: 053 046 0039
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="lg:hidden text-brand-dark text-2xl focus:outline-none">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="hidden lg:hidden pb-4 border-t border-gray-100 mt-2 pt-4">
+                <div class="flex flex-col space-y-3">
+                    <a href="#home" class="text-sm font-medium text-gray-700 hover:text-brand-red transition">Home</a>
+                    <a href="#story" class="text-sm font-medium text-gray-700 hover:text-brand-red transition">Story</a>
+                    <a href="#menu" class="text-sm font-medium text-gray-700 hover:text-brand-red transition">Menu</a>
+                    <a href="#locations" class="text-sm font-medium text-gray-700 hover:text-brand-red transition">Locations</a>
+                    <a href="#contact" class="text-sm font-medium text-gray-700 hover:text-brand-red transition">Contact</a>
+                    <a href="#socials" class="text-sm font-medium text-gray-700 hover:text-brand-red transition">Socials</a>
+                    <a href="tel:0530460039" class="inline-flex items-center gap-2 bg-brand-dark text-white px-5 py-2.5 rounded-full text-sm font-semibold w-fit mt-2">
+                        <i class="fas fa-phone-alt text-xs"></i> Order: 053 046 0039
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- 2. HERO SECTION -->
+    <!-- ============================================ -->
+    <section id="home" class="relative overflow-hidden bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Content -->
+                <div class="space-y-6 text-center lg:text-left">
+                    <!-- Pill Tag -->
+                    <span class="inline-block bg-brand-redLight text-brand-red text-xs font-bold tracking-widest uppercase px-4 py-2 rounded-full">
+                        Where Royalty Meets Flavor
+                    </span>
+
+                    <!-- Headline -->
+                    <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight text-brand-dark">
+                        Delicious Food Crafted for <span class="text-brand-red">Royalty</span>
+                    </h1>
+
+                    <!-- Description -->
+                    <p class="text-gray-600 text-base sm:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">
+                        Experience the finest authentic Ghanaian and continental cuisine in the heart of Kumasi. Every meal at Mista King Kitchen is prepared with passion, served with pride, and fit for a king.
+                    </p>
+
+                    <!-- Founded By -->
+                    <p class="text-xs font-semibold tracking-widest text-gray-400 uppercase">
+                        Founded by Joseph & Godwin
+                    </p>
+
+                    <!-- Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#menu" class="inline-flex items-center justify-center gap-2 bg-brand-red text-white px-8 py-3.5 rounded-full font-semibold text-sm hover:bg-brand-redHover transition shadow-lg shadow-red-200">
+                            <i class="fas fa-utensils"></i> View Royal Menu
+                        </a>
+                        <a href="#locations" class="inline-flex items-center justify-center gap-2 border-2 border-brand-dark text-brand-dark px-8 py-3.5 rounded-full font-semibold text-sm hover:bg-brand-dark hover:text-white transition">
+                            <i class="fas fa-map-marker-alt"></i> Visit Us
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Visual -->
+                <div class="relative flex items-center justify-center">
+                    <!-- Main Circle -->
+                    <div class="hero-circle relative w-72 h-72 sm:w-96 sm:h-96 rounded-full flex items-center justify-center">
+                        <!-- Food Image inside circle -->
+                        <img src="https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?w=400&h=400&fit=crop"
+                             alt="Delicious Jollof Rice"
+                             class="w-56 h-56 sm:w-72 sm:h-72 rounded-full object-cover border-4 border-white/20 shadow-2xl"
+                             onerror="this.style.display='none'">
+                    </div>
+
+                    <!-- Floating Card -->
+                    <div class="floating-card absolute bottom-4 right-0 sm:right-4 bg-white rounded-2xl shadow-xl p-4 flex items-center gap-3 max-w-[220px]">
+                        <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-motorcycle text-green-600"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-brand-dark">Delivery Available</p>
+                            <p class="text-[10px] text-gray-500">Hot & Fresh to your door</p>
+                        </div>
+                    </div>
+
+                    <!-- Decorative dots -->
+                    <div class="absolute top-8 left-8 w-3 h-3 bg-brand-red rounded-full opacity-40"></div>
+                    <div class="absolute top-16 right-12 w-2 h-2 bg-brand-red rounded-full opacity-30"></div>
+                    <div class="absolute bottom-20 left-4 w-4 h-4 bg-brand-red rounded-full opacity-20"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 3. ANNOUNCEMENT BAR -->
+    <!-- ============================================ -->
+    <div class="announcement-bar bg-brand-dark text-white py-3 overflow-hidden">
+        <div class="flex items-center justify-center gap-4 sm:gap-8 text-xs sm:text-sm font-semibold tracking-wide flex-wrap px-4">
+            <span class="flex items-center gap-2">
+                <i class="fas fa-bolt text-brand-red"></i>
+                Fast Delivery Available
+            </span>
+            <span class="hidden sm:inline text-gray-600">|</span>
+            <a href="tel:0530460039" class="flex items-center gap-2 hover:text-brand-red transition">
+                <i class="fas fa-phone-alt text-brand-red"></i> 053 046 0039
+            </a>
+            <span class="hidden sm:inline text-gray-600">|</span>
+            <a href="tel:0551713849" class="flex items-center gap-2 hover:text-brand-red transition">
+                <i class="fas fa-phone-alt text-brand-red"></i> 055 171 3849
+            </a>
+            <span class="hidden sm:inline text-gray-600">|</span>
+            <a href="https://www.instagram.com/mista_king_shawarma" target="_blank" rel="noopener" class="flex items-center gap-2 hover:text-brand-red transition">
+                <i class="fab fa-instagram text-brand-red"></i> @MISTA_KING_SHAWARMA
+            </a>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- 4. ABOUT SECTION -->
+    <!-- ============================================ -->
+    <section id="story" class="py-16 lg:py-24 bg-brand-offwhite">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <!-- Left Image -->
+                <div class="relative">
+                    <div class="rounded-2xl overflow-hidden shadow-xl">
+                        <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=600&h=450&fit=crop"
+                             alt="Ghana Jollof Rice"
+                             class="w-full h-72 sm:h-96 object-cover"
+                             onerror="this.style.display='none'; this.parentElement.classList.add('bg-brand-redLight')">
+                    </div>
+                    <!-- Badge -->
+                    <div class="absolute -bottom-5 -right-3 sm:right-6 bg-brand-red text-white rounded-2xl px-5 py-3 shadow-lg">
+                        <p class="font-display font-bold text-lg leading-tight">MKK</p>
+                        <p class="text-[10px] font-semibold tracking-wider">EST. 2024</p>
+                    </div>
+                </div>
+
+                <!-- Right Content -->
+                <div class="space-y-6">
+                    <span class="text-brand-red font-bold text-xs tracking-widest uppercase">The Founder's Story</span>
+                    <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-brand-dark leading-tight">
+                        A Shared Passion for Culinary Perfection
+                    </h2>
+                    <p class="text-gray-600 leading-relaxed">
+                        Mista King Kitchen was born from a shared dream between Joseph and Godwin — two visionaries who believed that great food has the power to bring people together. What started as a simple idea in Kumasi has grown into a beloved culinary destination.
+                    </p>
+                    <p class="text-gray-600 leading-relaxed">
+                        Our mission is simple: to serve every plate with the same care and excellence you'd expect at a royal table. From our signature Ghana Jollof Rice to our sizzling Shawarma, every dish tells a story of tradition, quality, and love.
+                    </p>
+
+                    <!-- Feature Icons -->
+                    <div class="grid sm:grid-cols-2 gap-4 pt-4">
+                        <div class="flex items-center gap-3 bg-white rounded-xl p-4 shadow-sm">
+                            <div class="w-12 h-12 bg-brand-redLight rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-award text-brand-red text-lg"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-sm text-brand-dark">Uncompromising Quality</p>
+                                <p class="text-xs text-gray-500">Only the finest ingredients</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 bg-white rounded-xl p-4 shadow-sm">
+                            <div class="w-12 h-12 bg-brand-redLight rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-crown text-brand-red text-lg"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-sm text-brand-dark">Royal Service</p>
+                                <p class="text-xs text-gray-500">Hospitality fit for kings</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 5. MENU SECTION -->
+    <!-- ============================================ -->
+    <section id="menu" class="py-16 lg:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Header -->
+            <div class="text-center mb-14">
+                <span class="text-brand-red font-bold text-xs tracking-widest uppercase">The Royal Menu</span>
+                <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-brand-dark mt-2">
+                    Mista King Kitchen Menu
+                </h2>
+                <p class="text-gray-500 mt-3 max-w-lg mx-auto">
+                    Every dish is crafted with the freshest ingredients and a whole lot of love. Taste the royalty in every bite.
+                </p>
+            </div>
+
+            <!-- Menu Grid -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+
+                <!-- Card 1: Fried Rice -->
+                <div class="menu-card bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=400&h=300&fit=crop"
+                             alt="Fried Rice" class="w-full h-full object-cover"
+                             onerror="this.style.display='none'">
+                        <span class="absolute top-3 left-3 bg-blue-600 text-white text-[10px] font-bold tracking-wider px-3 py-1 rounded-full">
+                            Classic
+                        </span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-display font-bold text-lg text-brand-dark mb-1">Fried Rice</h3>
+                        <p class="text-gray-500 text-sm mb-3">A timeless favorite — wok-fried rice with your choice of protein and fresh veggies.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-brand-redLight text-brand-red text-xs font-bold px-2.5 py-1 rounded-full">20 GHS</span>
+                            <span class="bg-brand-redLight text-brand-red text-xs font-bold px-2.5 py-1 rounded-full">25 GHS</span>
+                            <span class="bg-brand-redLight text-brand-red text-xs font-bold px-2.5 py-1 rounded-full">30 GHS</span>
+                            <span class="bg-brand-redLight text-brand-red text-xs font-bold px-2.5 py-1 rounded-full">35 GHS</span>
+                            <span class="bg-brand-redLight text-brand-red text-xs font-bold px-2.5 py-1 rounded-full">40 GHS</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-3 border-t border-gray-100">
+                            <span class="text-brand-red font-bold text-sm">Order Now</span>
+                            <a href="tel:0530460039" class="w-9 h-9 bg-brand-redLight rounded-full flex items-center justify-center hover:bg-brand-red hover:text-white transition text-brand-red">
+                                <i class="fas fa-phone-alt text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Assorted Fried Rice / Indomie -->
+                <div class="menu-card bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&h=300&fit=crop"
+                             alt="Assorted Fried Rice / Indomie" class="w-full h-full object-cover"
+                             onerror="this.style.display='none'">
+                        <span class="absolute top-3 left-3 bg-orange-500 text-white text-[10px] font-bold tracking-wider px-3 py-1 rounded-full">
+                            Fresh & Spicy
+                        </span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-display font-bold text-lg text-brand-dark mb-1">Assorted Fried Rice / Indomie</h3>
+                        <p class="text-gray-500 text-sm mb-3">Loaded with assorted proteins and vegetables, served with Indomie noodles.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-brand-redLight text-brand-red text-xs font-bold px-2.5 py-1 rounded-full">30 GHS</span>
+                            <span class="bg-brand-redLight text-brand-red text-xs font-bold px-2.5 py-1 rounded-full">40 GHS</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-3 border-t border-gray-100">
+                            <span class="text-brand-red font-bold text-sm">Order Now</span>
+                            <a href="tel:0530460039" class="w-9 h-9 bg-brand-redLight rounded-full flex items-center justify-center hover:bg-brand-red hover:text-white transition text-brand-red">
+                                <i class="fas fa-phone-alt text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Indomie -->
+                <div class="menu-card bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&h=300&fit=crop"
+                             alt="Indomie" class="w-full h-full object-cover"
+                             onerror="this.style.display='none'">
+                        <span class="absolute top-3 left-3 bg-amber-500 text-white text-[10px] font-bold tracking-wider px-3 py-1 rounded-full">
+                            Popular
+                        </span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-display font-bold text-lg text-brand-dark mb-1">Indomie</h3>
+                        <p class="text-gray-500 text-sm mb-3">Classic stir-fried Indomie noodles with your preferred style and toppings.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-brand-redLight text-brand-red text-xs font-bold px-2.5 py-1 rounded-full">20 GHS</span>
+                            <span class="bg-brand-redLight text-brand-red text-xs font-bold px-2.5 py-1 rounded-full">25 GHS</span>
+                            <span class="bg-brand-redLight text-brand-red text-xs font-bold px-2.5 py-1 rounded-full">30 GHS</span>
+                            <span class="bg-brand-redLight text-brand-red text-xs font-bold px-2.5 py-1 rounded-full">40 GHS</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-3 border-t border-gray-100">
+                            <span class="text-brand-red font-bold text-sm">Order Now</span>
+                            <a href="tel:0530460039" class="w-9 h-9 bg-brand-redLight rounded-full flex items-center justify-center hover:bg-brand-red hover:text-white transition text-brand-red">
+                                <i class="fas fa-phone-alt text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Shawarma -->
+                <div class="menu-card bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=400&h=300&fit=crop"
+                             alt="Shawarma" class="w-full h-full object-cover"
+                             onerror="this.style.display='none'">
+                        <span class="absolute top-3 left-3 bg-brand-red text-white text-[10px] font-bold tracking-wider px-3 py-1 rounded-full">
+                            Customer Favorite
+                        </span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-display font-bold text-lg text-brand-dark mb-1">Shawarma</h3>
+                        <p class="text-gray-500 text-sm mb-3">Juicy, perfectly seasoned meat wrapped in warm bread with our signature sauce.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-brand-redLight text-brand-red text-xs font-bold px-2.5 py-1 rounded-full">20 GHS</span>
+                            <span class="bg-brand-redLight text-brand-red text-xs font-bold px-2.5 py-1 rounded-full">25 GHS</span>
+                            <span class="bg-brand-redLight text-brand-red text-xs font-bold px-2.5 py-1 rounded-full">30 GHS</span>
+                            <span class="bg-brand-redLight text-brand-red text-xs font-bold px-2.5 py-1 rounded-full">40 GHS</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-3 border-t border-gray-100">
+                            <span class="text-brand-red font-bold text-sm">Order Now</span>
+                            <a href="tel:0530460039" class="w-9 h-9 bg-brand-redLight rounded-full flex items-center justify-center hover:bg-brand-red hover:text-white transition text-brand-red">
+                                <i class="fas fa-phone-alt text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5: Pizza -->
+                <div class="menu-card bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=300&fit=crop"
+                             alt="MKK Pizza" class="w-full h-full object-cover"
+                             onerror="this.style.display='none'">
+                        <span class="absolute top-3 left-3 bg-brand-red text-white text-[10px] font-bold tracking-wider px-3 py-1 rounded-full">
+                            House Special
+                        </span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-display font-bold text-lg text-brand-dark mb-1">Pizza</h3>
+                        <p class="text-gray-500 text-sm mb-3">Our signature pizza loaded with premium toppings and baked to golden perfection.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-green-100 text-green-700 text-xs font-bold px-2.5 py-1 rounded-full">Available</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-3 border-t border-gray-100">
+                            <span class="text-brand-red font-bold text-sm">Order Now</span>
+                            <a href="tel:0530460039" class="w-9 h-9 bg-brand-redLight rounded-full flex items-center justify-center hover:bg-brand-red hover:text-white transition text-brand-red">
+                                <i class="fas fa-phone-alt text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6: Jollof Rice -->
+                <div class="menu-card bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=400&h=300&fit=crop"
+                             alt="Ghana Jollof Rice" class="w-full h-full object-cover"
+                             onerror="this.style.display='none'">
+                        <span class="absolute top-3 left-3 bg-brand-dark text-white text-[10px] font-bold tracking-wider px-3 py-1 rounded-full">
+                            Signature
+                        </span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-display font-bold text-lg text-brand-dark mb-1">Jollof Rice</h3>
+                        <p class="text-gray-500 text-sm mb-3">The one and only — smoky, spicy, and irresistibly flavorful. Ghana's pride on a plate.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-green-100 text-green-700 text-xs font-bold px-2.5 py-1 rounded-full">Available</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-3 border-t border-gray-100">
+                            <span class="text-brand-red font-bold text-sm">Order Now</span>
+                            <a href="tel:0530460039" class="w-9 h-9 bg-brand-redLight rounded-full flex items-center justify-center hover:bg-brand-red hover:text-white transition text-brand-red">
+                                <i class="fas fa-phone-alt text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 7: Coke -->
+                <div class="menu-card bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100">
+                    <div class="relative h-48 overflow-hidden bg-gradient-to-br from-red-50 to-red-100 flex items-center justify-center">
+                        <i class="fas fa-glass-cheers text-6xl text-brand-red opacity-30"></i>
+                        <span class="absolute top-3 left-3 bg-red-600 text-white text-[10px] font-bold tracking-wider px-3 py-1 rounded-full">
+                            Drinks
+                        </span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-display font-bold text-lg text-brand-dark mb-1">Coke</h3>
+                        <p class="text-gray-500 text-sm mb-3">Ice-cold Coca-Cola to complement your meal perfectly.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-green-100 text-green-700 text-xs font-bold px-2.5 py-1 rounded-full">Available</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-3 border-t border-gray-100">
+                            <span class="text-brand-red font-bold text-sm">Order Now</span>
+                            <a href="tel:0530460039" class="w-9 h-9 bg-brand-redLight rounded-full flex items-center justify-center hover:bg-brand-red hover:text-white transition text-brand-red">
+                                <i class="fas fa-phone-alt text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 8: Chocolate -->
+                <div class="menu-card bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100">
+                    <div class="relative h-48 overflow-hidden bg-gradient-to-br from-amber-50 to-amber-100 flex items-center justify-center">
+                        <i class="fas fa-candy-cane text-6xl text-amber-700 opacity-30"></i>
+                        <span class="absolute top-3 left-3 bg-amber-700 text-white text-[10px] font-bold tracking-wider px-3 py-1 rounded-full">
+                            Drinks
+                        </span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-display font-bold text-lg text-brand-dark mb-1">Chocolate</h3>
+                        <p class="text-gray-500 text-sm mb-3">Rich, creamy chocolate drink — the perfect sweet treat.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-green-100 text-green-700 text-xs font-bold px-2.5 py-1 rounded-full">Available</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-3 border-t border-gray-100">
+                            <span class="text-brand-red font-bold text-sm">Order Now</span>
+                            <a href="tel:0530460039" class="w-9 h-9 bg-brand-redLight rounded-full flex items-center justify-center hover:bg-brand-red hover:text-white transition text-brand-red">
+                                <i class="fas fa-phone-alt text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Price Note -->
+            <p class="text-center text-gray-400 text-sm mt-8">
+                <i class="fas fa-info-circle mr-1"></i> All prices in Ghana Cedis (GHS). Prices may vary by location.
+            </p>
+
+            <!-- Order CTA -->
+            <div class="text-center mt-8">
+                <h3 class="font-display font-bold text-xl text-brand-dark mb-4">Order Now</h3>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="tel:0530460039" class="inline-flex items-center gap-2 bg-brand-red text-white px-8 py-3.5 rounded-full font-semibold text-sm hover:bg-brand-redHover transition shadow-lg shadow-red-200">
+                        <i class="fas fa-phone-alt"></i> 053 046 0039
+                    </a>
+                    <a href="tel:0551713849" class="inline-flex items-center gap-2 bg-brand-dark text-white px-8 py-3.5 rounded-full font-semibold text-sm hover:bg-gray-800 transition shadow-lg">
+                        <i class="fas fa-phone-alt"></i> 055 171 3849
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 6. LOCATIONS SECTION -->
+    <!-- ============================================ -->
+    <section id="locations" class="py-16 lg:py-24 bg-brand-offwhite">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Header -->
+            <div class="text-center mb-14">
+                <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-brand-dark">
+                    Our Branches & Operating Hours
+                </h2>
+                <p class="text-gray-500 mt-3">Visit us at any of our convenient locations in Kumasi</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8 lg:gap-12">
+                <!-- Left Column -->
+                <div class="space-y-6">
+                    <!-- Operating Hours -->
+                    <div class="bg-brand-dark rounded-2xl p-6 lg:p-8 text-white">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 bg-brand-red rounded-xl flex items-center justify-center">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h3 class="font-display font-bold text-lg">Operating Hours</h3>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center py-2 border-b border-gray-700">
+                                <span class="text-gray-300 text-sm">Monday – Friday</span>
+                                <span class="font-semibold text-sm">11:00 AM – 10:00 PM</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-700">
+                                <span class="text-gray-300 text-sm">Saturday</span>
+                                <span class="font-semibold text-sm">11:00 AM – 10:00 PM</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2">
+                                <span class="text-gray-300 text-sm">Sunday</span>
+                                <span class="font-semibold text-sm">11:00 AM – 10:00 PM</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Branch Cards -->
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
+                            <div class="w-10 h-10 bg-brand-redLight rounded-xl flex items-center justify-center mb-3">
+                                <i class="fas fa-store text-brand-red"></i>
+                            </div>
+                            <h4 class="font-bold text-brand-dark text-sm mb-1">Ayeduase Branch</h4>
+                            <p class="text-gray-500 text-xs leading-relaxed">Opposite SDA Church (KNUST)<br>Ayeduase, Kumasi, Ghana</p>
+                        </div>
+                        <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
+                            <div class="w-10 h-10 bg-brand-redLight rounded-xl flex items-center justify-center mb-3">
+                                <i class="fas fa-store text-brand-red"></i>
+                            </div>
+                            <h4 class="font-bold text-brand-dark text-sm mb-1">Atonsu Branch</h4>
+                            <p class="text-gray-500 text-xs leading-relaxed">Opposite Fidelity Bank<br>Atonsu Station, Kumasi, Ghana</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Map Placeholder -->
+                <div class="relative">
+                    <div class="bg-gray-200 rounded-2xl overflow-hidden h-full min-h-[400px] relative flex items-center justify-center">
+                        <!-- Stylized map placeholder -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-gray-300 via-gray-200 to-gray-300">
+                            <div class="absolute inset-0 opacity-20" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22><rect width=%2260%22 height=%2260%22 fill=%22none%22 stroke=%22%23999%22 stroke-width=%220.5%22/></svg>'); background-size: 30px 30px;"></div>
+                        </div>
+                        <div class="relative z-10 text-center p-8">
+                            <div class="w-16 h-16 bg-brand-red rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                                <i class="fas fa-map-marker-alt text-white text-2xl"></i>
+                            </div>
+                            <h4 class="font-display font-bold text-brand-dark text-lg mb-2">Mista King Kitchen</h4>
+                            <p class="text-gray-500 text-sm mb-4">Ayeduase & Atonsu branches<br>Kumasi, Ghana</p>
+                            <a href="https://www.google.com/maps/search/Mista+King+Kitchen+Kumasi"
+                               target="_blank" rel="noopener"
+                               class="inline-flex items-center gap-2 bg-brand-red text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-brand-redHover transition shadow-md">
+                                <i class="fas fa-external-link-alt text-xs"></i> Open Maps
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Get Directions Button -->
+            <div class="text-center mt-10">
+                <a href="https://www.google.com/maps/search/Mista+King+Kitchen+Kumasi"
+                   target="_blank" rel="noopener"
+                   class="inline-flex items-center gap-2 bg-brand-red text-white px-8 py-3.5 rounded-full font-semibold text-sm hover:bg-brand-redHover transition shadow-lg shadow-red-200">
+                    <i class="fas fa-directions"></i> Get Directions on Google Maps
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 7. CONTACT FORM SECTION -->
+    <!-- ============================================ -->
+    <section id="contact" class="py-16 lg:py-24 bg-brand-offwhite">
+        <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-2xl shadow-lg p-8 lg:p-10 border border-gray-100">
+                <!-- Header -->
+                <div class="text-center mb-8">
+                    <span class="text-brand-red font-bold text-xs tracking-widest uppercase">Get In Touch</span>
+                    <h2 class="font-display text-3xl font-extrabold text-brand-dark mt-2">Send Us a Message</h2>
+                    <p class="text-gray-500 mt-2 text-sm">Have a question or special request? We'd love to hear from you. Messages go to <span class="text-brand-red font-semibold">godwintext@gmail.com</span></p>
+                </div>
+
+                <!-- Form -->
+                <form id="contactForm" class="space-y-5">
+                    <div>
+                        <label for="name" class="block text-sm font-semibold text-gray-700 mb-1.5">Full Name *</label>
+                        <input type="text" id="name" name="name" required
+                               class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand-red focus:ring-2 focus:ring-red-100 outline-none transition text-sm bg-gray-50"
+                               placeholder="Your full name">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-semibold text-gray-700 mb-1.5">Email Address *</label>
+                        <input type="email" id="email" name="email" required
+                               class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand-red focus:ring-2 focus:ring-red-100 outline-none transition text-sm bg-gray-50"
+                               placeholder="you@example.com">
+                    </div>
+                    <div>
+                        <label for="phone" class="block text-sm font-semibold text-gray-700 mb-1.5">Phone (Optional)</label>
+                        <input type="tel" id="phone" name="phone"
+                               class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand-red focus:ring-2 focus:ring-red-100 outline-none transition text-sm bg-gray-50"
+                               placeholder="053 046 0039">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-semibold text-gray-700 mb-1.5">Message *</label>
+                        <textarea id="message" name="message" rows="4" required
+                                  class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand-red focus:ring-2 focus:ring-red-100 outline-none transition text-sm bg-gray-50 resize-none"
+                                  placeholder="Tell us what you'd like..."></textarea>
+                    </div>
+                    <button type="submit"
+                            class="w-full bg-brand-red text-white py-3.5 rounded-xl font-semibold text-sm hover:bg-brand-redHover transition shadow-lg shadow-red-200 flex items-center justify-center gap-2">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 8. SOCIAL MEDIA SECTION -->
+    <!-- ============================================ -->
+    <section id="socials" class="py-16 lg:py-24 bg-brand-dark">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Header -->
+            <div class="text-center mb-12">
+                <div class="w-14 h-14 bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <i class="fab fa-instagram text-white text-2xl"></i>
+                </div>
+                <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white">
+                    Join Us on Instagram
+                </h2>
+                <p class="text-gray-400 mt-3">Follow us for daily food pics, updates, and behind-the-scenes content</p>
+            </div>
+
+            <!-- Instagram Cards -->
+            <div class="grid sm:grid-cols-2 gap-6">
+                <!-- Card 1: Mista King Shawarma -->
+                <div class="bg-gray-900 rounded-2xl p-6 border border-gray-800 hover:border-gray-700 transition">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-14 h-14 bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fab fa-instagram text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white text-sm">@MISTA_KING_SHAWARMA</h4>
+                            <p class="text-gray-500 text-xs">Shawarma Specials & More</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-5">Follow for legendary shawarma, new flavors, combos, street food content and updates.</p>
+                    <a href="https://www.instagram.com/mista_king_shawarma" target="_blank" rel="noopener"
+                       class="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:opacity-90 transition">
+                        <i class="fab fa-instagram"></i> Follow @MISTA_KING_SHAWARMA
+                    </a>
+                </div>
+
+                <!-- Card 2: Mista King Kitchen -->
+                <div class="bg-gray-900 rounded-2xl p-6 border border-gray-800 hover:border-gray-700 transition">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-14 h-14 bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fab fa-instagram text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white text-sm">@MISTAKITCHEN</h4>
+                            <p class="text-gray-500 text-xs">Mista King Kitchen Official</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-5">Follow for our full menu highlights, customer moments, behind-the-scenes and special offers.</p>
+                    <a href="https://www.instagram.com/mistakingkitchen" target="_blank" rel="noopener"
+                       class="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:opacity-90 transition">
+                        <i class="fab fa-instagram"></i> Follow Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 9. FOOTER -->
+    <!-- ============================================ -->
+    <footer class="bg-brand-dark text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-16 mb-12">
+                <!-- Left: Brand -->
+                <div class="space-y-4">
+                    <span class="font-display font-extrabold text-xl tracking-tight">
+                        <span class="text-brand-red">MISTA</span> <span class="text-white">KING</span>
+                        <span class="text-brand-red"> KITCHEN</span>
+                    </span>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Serving the finest Ghanaian and continental cuisine in Kumasi. Every plate is crafted with passion and served with pride.
+                    </p>
+                    <p class="text-gray-500 text-xs">Founded by Joseph & Godwin</p>
+                    <div class="flex items-center gap-2 mt-3">
+                        <a href="https://www.instagram.com/mista_king_shawarma" target="_blank" rel="noopener"
+                           class="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center hover:bg-brand-red transition text-gray-400 hover:text-white">
+                            <i class="fab fa-instagram text-sm"></i>
+                        </a>
+                        <span class="text-gray-500 text-xs">@MISTA_KING_SHAWARMA</span>
+                    </div>
+                </div>
+
+                <!-- Center: Navigation -->
+                <div>
+                    <h4 class="font-bold text-sm uppercase tracking-wider mb-4 text-gray-300">Quick Links</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="#home" class="text-gray-400 text-sm hover:text-brand-red transition">Home</a></li>
+                        <li><a href="#story" class="text-gray-400 text-sm hover:text-brand-red transition">Our Story</a></li>
+                        <li><a href="#menu" class="text-gray-400 text-sm hover:text-brand-red transition">Menu</a></li>
+                        <li><a href="#locations" class="text-gray-400 text-sm hover:text-brand-red transition">Locations</a></li>
+                        <li><a href="#contact" class="text-gray-400 text-sm hover:text-brand-red transition">Contact</a></li>
+                        <li><a href="#socials" class="text-gray-400 text-sm hover:text-brand-red transition">Social Media</a></li>
+                    </ul>
+                </div>
+
+                <!-- Right: Contact & Branches -->
+                <div>
+                    <h4 class="font-bold text-sm uppercase tracking-wider mb-4 text-gray-300">Contact & Orders</h4>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="tel:0530460039" class="flex items-center gap-3 text-gray-400 text-sm hover:text-brand-red transition">
+                                <i class="fas fa-phone-alt text-brand-red w-4"></i> 053 046 0039
+                            </a>
+                        </li>
+                        <li>
+                            <a href="tel:0551713849" class="flex items-center gap-3 text-gray-400 text-sm hover:text-brand-red transition">
+                                <i class="fas fa-phone-alt text-brand-red w-4"></i> 055 171 3849
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:godwintext@gmail.com" class="flex items-center gap-3 text-gray-400 text-sm hover:text-brand-red transition">
+                                <i class="fas fa-envelope text-brand-red w-4"></i> godwintext@gmail.com
+                            </a>
+                        </li>
+                    </ul>
+                    <h4 class="font-bold text-sm uppercase tracking-wider mt-6 mb-3 text-gray-300">Branches</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-start gap-3 text-gray-400 text-xs">
+                            <i class="fas fa-map-marker-alt text-brand-red w-4 mt-0.5"></i>
+                            <span>Ayeduase — Opposite SDA Church (KNUST)</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-gray-400 text-xs">
+                            <i class="fas fa-map-marker-alt text-brand-red w-4 mt-0.5"></i>
+                            <span>Atonsu Station — Opposite Fidelity Bank</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="border-t border-gray-800 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p class="text-gray-500 text-xs">&copy; 2026 Mista King Kitchen. All rights reserved.</p>
+                <p class="text-gray-500 text-xs">
+                    Designed by <span class="text-brand-red font-semibold">Nentix</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================ -->
+    <!-- JAVASCRIPT -->
+    <!-- ============================================ -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                const icon = mobileMenuBtn.querySelector('i');
+                if (mobileMenu.classList.contains('hidden')) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                } else {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                }
+            });
+
+            // Close mobile menu when a link is clicked
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+                    mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+                });
+            });
+        }
+
+        // Contact Form Handler
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            // Create feedback area if not present
+            let feedback = document.getElementById('formFeedback');
+            if (!feedback) {
+                feedback = document.createElement('div');
+                feedback.id = 'formFeedback';
+                feedback.className = 'hidden text-sm font-semibold text-center py-3 px-4 rounded-xl mb-4';
+                contactForm.parentNode.insertBefore(feedback, contactForm);
+            }
+
+            contactForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const phone = document.getElementById('phone').value.trim();
+                const message = document.getElementById('message').value.trim();
+
+                const btn = this.querySelector('button[type="submit"]');
+                const originalText = btn.innerHTML;
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+                try {
+                    const res = await fetch('/api/contact', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ name, email, phone, message })
+                    });
+                    const data = await res.json();
+
+                    if (data.success) {
+                        feedback.textContent = data.message;
+                        feedback.className = 'text-sm font-semibold text-center py-3 px-4 rounded-xl mb-4 bg-green-100 text-green-700';
+                        contactForm.reset();
+                    } else {
+                        throw new Error(data.error || 'Something went wrong.');
+                    }
+                } catch (err) {
+                    // Fallback: open mailto if server is not available
+                    const subject = encodeURIComponent(`MKK Website Message from ${name}`);
+                    const body = encodeURIComponent(
+                        `Name: ${name}\nEmail: ${email}${phone ? '\nPhone: ' + phone : ''}\n\nMessage:\n${message}`
+                    );
+                    window.location.href = `mailto:godwintext@gmail.com?subject=${subject}&body=${body}`;
+
+                    feedback.textContent = 'Opening your email client as fallback...';
+                    feedback.className = 'text-sm font-semibold text-center py-3 px-4 rounded-xl mb-4 bg-blue-100 text-blue-700';
+                    contactForm.reset();
+                }
+
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+
+                // Hide feedback after 5 seconds
+                setTimeout(() => { feedback.className = 'hidden'; }, 5000);
+            });
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                const target = document.querySelector(targetId);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
