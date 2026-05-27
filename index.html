@@ -305,7 +305,7 @@
     </section>
 
     <!-- ============================================ -->
-    <!-- 5. MENU SECTION -->
+    <!-- 5. MENU SECTION (Dynamic from Backend) -->
     <!-- ============================================ -->
     <section id="menu" class="py-16 lg:py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -320,216 +320,12 @@
                 </p>
             </div>
 
-            <!-- Menu Grid -->
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-
-                <!-- Card 1: Fried Rice -->
-                <div class="menu-card bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100">
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=400&h=300&fit=crop"
-                             alt="Fried Rice" class="w-full h-full object-cover"
-                             onerror="this.style.display='none'">
-                        <span class="absolute top-3 left-3 bg-blue-600 text-white text-[10px] font-bold tracking-wider px-3 py-1 rounded-full">
-                            Classic
-                        </span>
-                    </div>
-                    <div class="p-5">
-                        <h3 class="font-display font-bold text-lg text-brand-dark mb-1">Fried Rice</h3>
-                        <p class="text-gray-500 text-sm mb-3">A timeless favorite — wok-fried rice with your choice of protein and fresh veggies.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-brand-redLight text-brand-red text-xs font-bold px-2.5 py-1 rounded-full">20 GHS</span>
-                            <span class="bg-brand-redLight text-brand-red text-xs font-bold px-2.5 py-1 rounded-full">25 GHS</span>
-                            <span class="bg-brand-redLight text-brand-red text-xs font-bold px-2.5 py-1 rounded-full">30 GHS</span>
-                            <span class="bg-brand-redLight text-brand-red text-xs font-bold px-2.5 py-1 rounded-full">35 GHS</span>
-                            <span class="bg-brand-redLight text-brand-red text-xs font-bold px-2.5 py-1 rounded-full">40 GHS</span>
-                        </div>
-                        <div class="flex items-center justify-between pt-3 border-t border-gray-100">
-                            <span class="text-brand-red font-bold text-sm">Order Now</span>
-                            <a href="tel:0530460039" class="w-9 h-9 bg-brand-redLight rounded-full flex items-center justify-center hover:bg-brand-red hover:text-white transition text-brand-red">
-                                <i class="fas fa-phone-alt text-xs"></i>
-                            </a>
-                        </div>
-                    </div>
+            <!-- Menu Grid (populated by JS) -->
+            <div id="menu-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                <div class="col-span-full text-center py-12">
+                    <i class="fas fa-spinner fa-spin text-3xl text-brand-red"></i>
+                    <p class="text-gray-400 mt-3">Loading menu...</p>
                 </div>
-
-                <!-- Card 2: Assorted Fried Rice / Indomie -->
-                <div class="menu-card bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100">
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&h=300&fit=crop"
-                             alt="Assorted Fried Rice / Indomie" class="w-full h-full object-cover"
-                             onerror="this.style.display='none'">
-                        <span class="absolute top-3 left-3 bg-orange-500 text-white text-[10px] font-bold tracking-wider px-3 py-1 rounded-full">
-                            Fresh & Spicy
-                        </span>
-                    </div>
-                    <div class="p-5">
-                        <h3 class="font-display font-bold text-lg text-brand-dark mb-1">Assorted Fried Rice / Indomie</h3>
-                        <p class="text-gray-500 text-sm mb-3">Loaded with assorted proteins and vegetables, served with Indomie noodles.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-brand-redLight text-brand-red text-xs font-bold px-2.5 py-1 rounded-full">30 GHS</span>
-                            <span class="bg-brand-redLight text-brand-red text-xs font-bold px-2.5 py-1 rounded-full">40 GHS</span>
-                        </div>
-                        <div class="flex items-center justify-between pt-3 border-t border-gray-100">
-                            <span class="text-brand-red font-bold text-sm">Order Now</span>
-                            <a href="tel:0530460039" class="w-9 h-9 bg-brand-redLight rounded-full flex items-center justify-center hover:bg-brand-red hover:text-white transition text-brand-red">
-                                <i class="fas fa-phone-alt text-xs"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 3: Indomie -->
-                <div class="menu-card bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100">
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&h=300&fit=crop"
-                             alt="Indomie" class="w-full h-full object-cover"
-                             onerror="this.style.display='none'">
-                        <span class="absolute top-3 left-3 bg-amber-500 text-white text-[10px] font-bold tracking-wider px-3 py-1 rounded-full">
-                            Popular
-                        </span>
-                    </div>
-                    <div class="p-5">
-                        <h3 class="font-display font-bold text-lg text-brand-dark mb-1">Indomie</h3>
-                        <p class="text-gray-500 text-sm mb-3">Classic stir-fried Indomie noodles with your preferred style and toppings.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-brand-redLight text-brand-red text-xs font-bold px-2.5 py-1 rounded-full">20 GHS</span>
-                            <span class="bg-brand-redLight text-brand-red text-xs font-bold px-2.5 py-1 rounded-full">25 GHS</span>
-                            <span class="bg-brand-redLight text-brand-red text-xs font-bold px-2.5 py-1 rounded-full">30 GHS</span>
-                            <span class="bg-brand-redLight text-brand-red text-xs font-bold px-2.5 py-1 rounded-full">40 GHS</span>
-                        </div>
-                        <div class="flex items-center justify-between pt-3 border-t border-gray-100">
-                            <span class="text-brand-red font-bold text-sm">Order Now</span>
-                            <a href="tel:0530460039" class="w-9 h-9 bg-brand-redLight rounded-full flex items-center justify-center hover:bg-brand-red hover:text-white transition text-brand-red">
-                                <i class="fas fa-phone-alt text-xs"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 4: Shawarma -->
-                <div class="menu-card bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100">
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=400&h=300&fit=crop"
-                             alt="Shawarma" class="w-full h-full object-cover"
-                             onerror="this.style.display='none'">
-                        <span class="absolute top-3 left-3 bg-brand-red text-white text-[10px] font-bold tracking-wider px-3 py-1 rounded-full">
-                            Customer Favorite
-                        </span>
-                    </div>
-                    <div class="p-5">
-                        <h3 class="font-display font-bold text-lg text-brand-dark mb-1">Shawarma</h3>
-                        <p class="text-gray-500 text-sm mb-3">Juicy, perfectly seasoned meat wrapped in warm bread with our signature sauce.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-brand-redLight text-brand-red text-xs font-bold px-2.5 py-1 rounded-full">20 GHS</span>
-                            <span class="bg-brand-redLight text-brand-red text-xs font-bold px-2.5 py-1 rounded-full">25 GHS</span>
-                            <span class="bg-brand-redLight text-brand-red text-xs font-bold px-2.5 py-1 rounded-full">30 GHS</span>
-                            <span class="bg-brand-redLight text-brand-red text-xs font-bold px-2.5 py-1 rounded-full">40 GHS</span>
-                        </div>
-                        <div class="flex items-center justify-between pt-3 border-t border-gray-100">
-                            <span class="text-brand-red font-bold text-sm">Order Now</span>
-                            <a href="tel:0530460039" class="w-9 h-9 bg-brand-redLight rounded-full flex items-center justify-center hover:bg-brand-red hover:text-white transition text-brand-red">
-                                <i class="fas fa-phone-alt text-xs"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 5: Pizza -->
-                <div class="menu-card bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100">
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=300&fit=crop"
-                             alt="MKK Pizza" class="w-full h-full object-cover"
-                             onerror="this.style.display='none'">
-                        <span class="absolute top-3 left-3 bg-brand-red text-white text-[10px] font-bold tracking-wider px-3 py-1 rounded-full">
-                            House Special
-                        </span>
-                    </div>
-                    <div class="p-5">
-                        <h3 class="font-display font-bold text-lg text-brand-dark mb-1">Pizza</h3>
-                        <p class="text-gray-500 text-sm mb-3">Our signature pizza loaded with premium toppings and baked to golden perfection.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-green-100 text-green-700 text-xs font-bold px-2.5 py-1 rounded-full">Available</span>
-                        </div>
-                        <div class="flex items-center justify-between pt-3 border-t border-gray-100">
-                            <span class="text-brand-red font-bold text-sm">Order Now</span>
-                            <a href="tel:0530460039" class="w-9 h-9 bg-brand-redLight rounded-full flex items-center justify-center hover:bg-brand-red hover:text-white transition text-brand-red">
-                                <i class="fas fa-phone-alt text-xs"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 6: Jollof Rice -->
-                <div class="menu-card bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100">
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=400&h=300&fit=crop"
-                             alt="Ghana Jollof Rice" class="w-full h-full object-cover"
-                             onerror="this.style.display='none'">
-                        <span class="absolute top-3 left-3 bg-brand-dark text-white text-[10px] font-bold tracking-wider px-3 py-1 rounded-full">
-                            Signature
-                        </span>
-                    </div>
-                    <div class="p-5">
-                        <h3 class="font-display font-bold text-lg text-brand-dark mb-1">Jollof Rice</h3>
-                        <p class="text-gray-500 text-sm mb-3">The one and only — smoky, spicy, and irresistibly flavorful. Ghana's pride on a plate.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-green-100 text-green-700 text-xs font-bold px-2.5 py-1 rounded-full">Available</span>
-                        </div>
-                        <div class="flex items-center justify-between pt-3 border-t border-gray-100">
-                            <span class="text-brand-red font-bold text-sm">Order Now</span>
-                            <a href="tel:0530460039" class="w-9 h-9 bg-brand-redLight rounded-full flex items-center justify-center hover:bg-brand-red hover:text-white transition text-brand-red">
-                                <i class="fas fa-phone-alt text-xs"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 7: Coke -->
-                <div class="menu-card bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100">
-                    <div class="relative h-48 overflow-hidden bg-gradient-to-br from-red-50 to-red-100 flex items-center justify-center">
-                        <i class="fas fa-glass-cheers text-6xl text-brand-red opacity-30"></i>
-                        <span class="absolute top-3 left-3 bg-red-600 text-white text-[10px] font-bold tracking-wider px-3 py-1 rounded-full">
-                            Drinks
-                        </span>
-                    </div>
-                    <div class="p-5">
-                        <h3 class="font-display font-bold text-lg text-brand-dark mb-1">Coke</h3>
-                        <p class="text-gray-500 text-sm mb-3">Ice-cold Coca-Cola to complement your meal perfectly.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-green-100 text-green-700 text-xs font-bold px-2.5 py-1 rounded-full">Available</span>
-                        </div>
-                        <div class="flex items-center justify-between pt-3 border-t border-gray-100">
-                            <span class="text-brand-red font-bold text-sm">Order Now</span>
-                            <a href="tel:0530460039" class="w-9 h-9 bg-brand-redLight rounded-full flex items-center justify-center hover:bg-brand-red hover:text-white transition text-brand-red">
-                                <i class="fas fa-phone-alt text-xs"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 8: Chocolate -->
-                <div class="menu-card bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100">
-                    <div class="relative h-48 overflow-hidden bg-gradient-to-br from-amber-50 to-amber-100 flex items-center justify-center">
-                        <i class="fas fa-candy-cane text-6xl text-amber-700 opacity-30"></i>
-                        <span class="absolute top-3 left-3 bg-amber-700 text-white text-[10px] font-bold tracking-wider px-3 py-1 rounded-full">
-                            Drinks
-                        </span>
-                    </div>
-                    <div class="p-5">
-                        <h3 class="font-display font-bold text-lg text-brand-dark mb-1">Chocolate</h3>
-                        <p class="text-gray-500 text-sm mb-3">Rich, creamy chocolate drink — the perfect sweet treat.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-green-100 text-green-700 text-xs font-bold px-2.5 py-1 rounded-full">Available</span>
-                        </div>
-                        <div class="flex items-center justify-between pt-3 border-t border-gray-100">
-                            <span class="text-brand-red font-bold text-sm">Order Now</span>
-                            <a href="tel:0530460039" class="w-9 h-9 bg-brand-redLight rounded-full flex items-center justify-center hover:bg-brand-red hover:text-white transition text-brand-red">
-                                <i class="fas fa-phone-alt text-xs"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
             </div>
 
             <!-- Price Note -->
@@ -551,6 +347,27 @@
             </div>
         </div>
     </section>
+
+    <!-- Menu Template (hidden) -->
+    <template id="menu-card-template">
+        <div class="menu-card bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100">
+            <div class="relative h-48 overflow-hidden">
+                <img src="" alt="" class="w-full h-full object-cover menu-card-img" onerror="this.style.display='none'">
+                <span class="absolute top-3 left-3 text-white text-[10px] font-bold tracking-wider px-3 py-1 rounded-full menu-card-tag"></span>
+            </div>
+            <div class="p-5">
+                <h3 class="font-display font-bold text-lg text-brand-dark mb-1 menu-card-name"></h3>
+                <p class="text-gray-500 text-sm mb-3 menu-card-desc"></p>
+                <div class="flex flex-wrap gap-2 mb-4 menu-card-prices"></div>
+                <div class="flex items-center justify-between pt-3 border-t border-gray-100">
+                    <span class="text-brand-red font-bold text-sm">Order Now</span>
+                    <a href="tel:0530460039" class="w-9 h-9 bg-brand-redLight rounded-full flex items-center justify-center hover:bg-brand-red hover:text-white transition text-brand-red">
+                        <i class="fas fa-phone-alt text-xs"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </template>
 
     <!-- ============================================ -->
     <!-- 6. LOCATIONS SECTION -->
@@ -941,6 +758,79 @@
                 }
             });
         });
+
+        // ─── Load Menu from Backend ───
+        async function loadMenu() {
+            const grid = document.getElementById('menu-grid');
+            const template = document.getElementById('menu-card-template');
+
+            try {
+                const res = await fetch('/api/menu');
+                const data = await res.json();
+                const items = data.items || [];
+
+                if (!items.length) {
+                    grid.innerHTML = '<div class="col-span-full text-center py-12 text-gray-400">No menu items available. Check back soon!</div>';
+                    return;
+                }
+
+                grid.innerHTML = '';
+
+                items.forEach(item => {
+                    const card = template.content.cloneNode(true);
+                    const priceColors = {
+                        'Customer Favorite': 'bg-brand-red',
+                        'Signature': 'bg-brand-dark',
+                        'Fresh & Spicy': 'bg-orange-500',
+                        'Classic': 'bg-blue-600',
+                        'House Special': 'bg-brand-red',
+                        'Popular': 'bg-amber-500',
+                        'Drinks': item.name === 'Coke' ? 'bg-red-600' : 'bg-amber-700'
+                    };
+
+                    // Tag
+                    const tag = card.querySelector('.menu-card-tag');
+                    tag.textContent = tag.className += ' ' + (priceColors[item.tag] || 'bg-gray-600');
+
+                    // Image
+                    const img = card.querySelector('.menu-card-img');
+                    if (item.image) {
+                        img.src = item.image;
+                        img.alt = item.name;
+                    } else {
+                        img.style.display = 'none';
+                    }
+
+                    // Name & description
+                    card.querySelector('.menu-card-name').textContent = item.name;
+                    card.querySelector('.menu-card-desc').textContent = item.description || '';
+
+                    // Prices
+                    const pricesDiv = card.querySelector('.menu-card-prices');
+                    if (item.prices && item.prices.length > 0) {
+                        item.prices.forEach(p => {
+                            const span = document.createElement('span');
+                            span.className = 'bg-brand-redLight text-brand-red text-xs font-bold px-2.5 py-1 rounded-full';
+                            span.textContent = p + ' GHS';
+                            pricesDiv.appendChild(span);
+                        });
+                    } else if (item.priceLabel) {
+                        const span = document.createElement('span');
+                        span.className = 'bg-green-100 text-green-700 text-xs font-bold px-2.5 py-1 rounded-full';
+                        span.textContent = item.priceLabel;
+                        pricesDiv.appendChild(span);
+                    }
+
+                    grid.appendChild(card);
+                });
+            } catch (e) {
+                console.error('Menu load error:', e);
+                grid.innerHTML = '<div class="col-span-full text-center py-12 text-gray-400">Menu temporarily unavailable. Please call to order: 053 046 0039</div>';
+            }
+        }
+
+        // Load menu on page load
+        loadMenu();
     </script>
 
 </body>
