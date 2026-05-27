@@ -825,9 +825,14 @@
             <!-- Bottom Bar -->
             <div class="border-t border-gray-800 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <p class="text-gray-500 text-xs">&copy; 2026 Mista King Kitchen. All rights reserved.</p>
-                <p class="text-gray-500 text-xs">
-                    Designed by <span class="text-brand-red font-semibold">Nentix</span>
-                </p>
+                <div class="flex items-center gap-4">
+                    <a href="/_/" target="_blank" class="text-gray-600 text-xs hover:text-brand-red transition">
+                        <i class="fas fa-lock mr-1"></i> Admin
+                    </a>
+                    <p class="text-gray-500 text-xs">
+                        Designed by <span class="text-brand-red font-semibold">Nentix</span>
+                    </p>
+                </div>
             </div>
         </div>
     </footer>
@@ -866,7 +871,16 @@
         // Contact Form Handler
         const contactForm = document.getElementById('contactForm');
         if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
+            // Create feedback area if not present
+            let feedback = document.getElementById('formFeedback');
+            if (!feedback) {
+                feedback = document.createElement('div');
+                feedback.id = 'formFeedback';
+                feedback.className = 'hidden text-sm font-semibold text-center py-3 px-4 rounded-xl mb-4';
+                contactForm.parentNode.insertBefore(feedback, contactForm);
+            }
+
+            contactForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
 
                 const name = document.getElementById('name').value.trim();
@@ -874,30 +888,44 @@
                 const phone = document.getElementById('phone').value.trim();
                 const message = document.getElementById('message').value.trim();
 
-                // Build mailto link
-                const subject = encodeURIComponent(`MKK Website Message from ${name}`);
-                const body = encodeURIComponent(
-                    `Name: ${name}\nEmail: ${email}${phone ? '\nPhone: ' + phone : ''}\n\nMessage:\n${message}`
-                );
-                const mailtoURL = `mailto:godwintext@gmail.com?subject=${subject}&body=${body}`;
-
-                // Open email client
-                window.location.href = mailtoURL;
-
-                // Show feedback
                 const btn = this.querySelector('button[type="submit"]');
                 const originalText = btn.innerHTML;
-                btn.innerHTML = '<i class="fas fa-check"></i> Email Client Opened!';
-                btn.classList.remove('bg-brand-red', 'hover:bg-brand-redHover');
-                btn.classList.add('bg-green-600', 'hover:bg-green-700');
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
 
-                // Reset form and button after delay
-                this.reset();
-                setTimeout(() => {
-                    btn.innerHTML = originalText;
-                    btn.classList.remove('bg-green-600', 'hover:bg-green-700');
-                    btn.classList.add('bg-brand-red', 'hover:bg-brand-redHover');
-                }, 3000);
+                try {
+                    const res = await fetch('/api/contact', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ name, email, phone, message })
+                    });
+                    const data = await res.json();
+
+                    if (data.success) {
+                        feedback.textContent = data.message;
+                        feedback.className = 'text-sm font-semibold text-center py-3 px-4 rounded-xl mb-4 bg-green-100 text-green-700';
+                        contactForm.reset();
+                    } else {
+                        throw new Error(data.error || 'Something went wrong.');
+                    }
+                } catch (err) {
+                    // Fallback: open mailto if server is not available
+                    const subject = encodeURIComponent(`MKK Website Message from ${name}`);
+                    const body = encodeURIComponent(
+                        `Name: ${name}\nEmail: ${email}${phone ? '\nPhone: ' + phone : ''}\n\nMessage:\n${message}`
+                    );
+                    window.location.href = `mailto:godwintext@gmail.com?subject=${subject}&body=${body}`;
+
+                    feedback.textContent = 'Opening your email client as fallback...';
+                    feedback.className = 'text-sm font-semibold text-center py-3 px-4 rounded-xl mb-4 bg-blue-100 text-blue-700';
+                    contactForm.reset();
+                }
+
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+
+                // Hide feedback after 5 seconds
+                setTimeout(() => { feedback.className = 'hidden'; }, 5000);
             });
         }
 
